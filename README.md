@@ -21,6 +21,7 @@ Table of Contents
     * [`repl()`](#replpath-num)
     * [`get()`](#getpath-datanone)
     * [`put()`](#putpath-data)
+    * [`content_summary()`](#get-content-summary)
   * [WebHDFSObject](#webhdfsobject)
     * [`__init__()`](#__init__path-bits)
     * [`is_dir()`](#is_dir)
@@ -292,6 +293,28 @@ Returns:
 Raises:
 * `WebHDFSIncompleteTransferError`
 
+#### `content_summary(path)` ####
+Get Content Summary of a Directory.  Returns a dict.  Uses this WebHDFS request:
+
+    GET <BASE>/webhdfs/v1/<PATH>?op=GETCONTENTSUMMARY
+
+Parameters:
+* `path`: HDFS directory to get the content summary for
+
+Returns:
+* Dict containg the Content Summary of the specified path or None on error
+
+```python
+>>> hdfs.content_summary('/user/test')
+{
+    "directoryCount": 2,
+    "fileCount"     : 1,
+    "length"        : 24930,
+    "quota"         : -1,
+    "spaceConsumed" : 24930,
+    "spaceQuota"    : -1
+}
+```
 
 ## `WebHDFSObject` ##
 

@@ -1,5 +1,6 @@
 import errno
 import fnmatch
+import json
 import logging
 import os
 import requests
@@ -231,3 +232,11 @@ class WebHDFSClient(object):
 
         data.close()
         return True
+
+    def content_summary(self, path):
+        p = self._fix(path)
+        resp = self._req('GETCONTENTSUMMARY', p, 'get')
+        if 'ContentSummary' in resp:
+            return resp['ContentSummary']
+        else:
+            return None
