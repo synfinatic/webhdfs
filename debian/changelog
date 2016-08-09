@@ -1,3 +1,10 @@
+webhdfs (1.0.8) stable; urgency=low
+
+  * Tagging 1.0.8
+  * [adc375e] Issue #32: Add GETCONTENTSUMMARY support (Aaron Turner)
+
+ -- Aaron Turner <synfinatic@gmail.com>  Mon, 08 Aug 2016 15:45:00 -0800
+
 webhdfs (1.0.7) stable; urgency=medium
 
   * Tagging 1.0.7
