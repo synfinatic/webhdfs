@@ -169,10 +169,14 @@ class WebHDFSClient(object):
 
         return l
 
-    def du(self, path, real=False):
+    def content_summary(self, path):
         p = self._fix(path)
-        r = self._req('GETCONTENTSUMMARY', p)
-        return r['ContentSummary']['length'] if not real else r['ContentSummary']['spaceConsumed']
+        resp = self._req('GETCONTENTSUMMARY', p, 'get')
+        return resp['ContentSummary']
+
+    def du(self, path, real=False):
+        r = self.content_summary(path)
+        return r['length'] if not real else r['spaceConsumed']
 
     def mkdir(self, path):
         p = self._fix(path)
@@ -232,11 +236,3 @@ class WebHDFSClient(object):
 
         data.close()
         return True
-
-    def content_summary(self, path):
-        p = self._fix(path)
-        resp = self._req('GETCONTENTSUMMARY', p, 'get')
-        if 'ContentSummary' in resp:
-            return resp['ContentSummary']
-        else:
-            return None
